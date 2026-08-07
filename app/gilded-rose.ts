@@ -35,13 +35,7 @@ export class GildedRose {
     }
 
     if (item.name === AGED_BRIE) {
-      this.increaseQuality(item);
-      item.sellIn = item.sellIn - 1;
-
-      if (item.sellIn < 0) {
-        this.increaseQuality(item);
-      }
-
+      this.updateAgedBrie(item);
       return;
     }
 
@@ -67,6 +61,15 @@ export class GildedRose {
       } else {
         item.quality = 0;
       }
+    }
+  }
+
+  private updateAgedBrie(item: Item): void {
+    this.increaseQuality(item);
+    item.sellIn = item.sellIn - 1;
+
+    if (item.sellIn < 0) {
+      this.increaseQuality(item);
     }
   }
 
