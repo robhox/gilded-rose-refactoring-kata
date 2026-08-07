@@ -38,17 +38,13 @@ export class GildedRose {
       this.decreaseQuality(item);
     } else {
       if (item.quality < 50) {
-        item.quality = item.quality + 1;
+        this.increaseQuality(item);
         if (item.name === BACKSTAGE_PASS) {
           if (item.sellIn < 11) {
-            if (item.quality < 50) {
-              item.quality = item.quality + 1;
-            }
+            this.increaseQuality(item);
           }
           if (item.sellIn < 6) {
-            if (item.quality < 50) {
-              item.quality = item.quality + 1;
-            }
+            this.increaseQuality(item);
           }
         }
       }
@@ -64,9 +60,7 @@ export class GildedRose {
           item.quality = 0;
         }
       } else {
-        if (item.quality < 50) {
-          item.quality = item.quality + 1;
-        }
+        this.increaseQuality(item);
       }
     }
   }
@@ -74,6 +68,12 @@ export class GildedRose {
   private decreaseQuality(item: Item): void {
     if (item.quality > 0) {
       item.quality = item.quality - 1;
+    }
+  }
+
+  private increaseQuality(item: Item): void {
+    if (item.quality < 50) {
+      item.quality = item.quality + 1;
     }
   }
 }
