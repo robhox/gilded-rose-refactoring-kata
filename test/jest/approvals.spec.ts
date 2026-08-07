@@ -1,13 +1,5 @@
-import { Item, GildedRose } from '@/gilded-rose';
-
 /**
- * This unit test uses [Jest Snapshot](https://goo.gl/fbAQLP).
- * 
- * There are two test cases here with different styles:
- * <li>"foo" is more similar to the unit test from the 'Java' version
- * <li>"thirtyDays" is more similar to the TextTest from the 'Java' version
- *
- * I suggest choosing one style to develop and deleting the other.
+ * Characterizes the inventory output over thirty days with a Jest snapshot.
  */
 
 describe('Gilded Rose Approval', () => {
@@ -37,14 +29,7 @@ describe('Gilded Rose Approval', () => {
     process.argv = originalProcessArgv;
   });
 
-  it('should foo', () => {
-    const gildedRose = new GildedRose([new Item('foo', 0, 0)]);
-    const items = gildedRose.updateQuality();
-  
-    expect(items).toMatchSnapshot();
-  });
-
-  it('should thirtyDays', () => {
+  it('matches the inventory simulation over thirty days', () => {
     process.argv = ["<node>", "<script", "30"];
     require('../golden-master-text-test.ts');
        
