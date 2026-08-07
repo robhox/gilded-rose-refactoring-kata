@@ -55,7 +55,7 @@ export class GildedRose {
 
   private updateRegularItem(item: Item): void {
     this.decreaseQuality(item);
-    item.sellIn = item.sellIn - 1;
+    item.sellIn -= 1;
 
     if (item.sellIn < 0) {
       this.decreaseQuality(item);
@@ -64,7 +64,7 @@ export class GildedRose {
 
   private updateConjuredItem(item: Item): void {
     this.decreaseQuality(item, 2);
-    item.sellIn = item.sellIn - 1;
+    item.sellIn -= 1;
 
     if (item.sellIn < 0) {
       this.decreaseQuality(item, 2);
@@ -73,7 +73,7 @@ export class GildedRose {
 
   private updateAgedBrie(item: Item): void {
     this.increaseQuality(item);
-    item.sellIn = item.sellIn - 1;
+    item.sellIn -= 1;
 
     if (item.sellIn < 0) {
       this.increaseQuality(item);
@@ -89,7 +89,7 @@ export class GildedRose {
       this.increaseQuality(item);
     }
 
-    item.sellIn = item.sellIn - 1;
+    item.sellIn -= 1;
 
     if (item.sellIn < 0) {
       item.quality = 0;
@@ -102,7 +102,7 @@ export class GildedRose {
 
   private increaseQuality(item: Item): void {
     if (item.quality < 50) {
-      item.quality = item.quality + 1;
+      item.quality += 1;
     }
   }
 }
