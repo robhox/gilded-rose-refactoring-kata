@@ -35,6 +35,28 @@ describe('Gilded Rose', () => {
     });
   });
 
+  describe("Conjured items", () => {
+    const name = "Conjured Mana Cake";
+
+    it("decreases quality twice as fast before the sell by date", () => {
+      const item = update(new Item(name, 3, 6));
+
+      expect(item).toEqual(new Item(name, 2, 4));
+    });
+
+    it("decreases quality twice as fast once the sell by date has passed", () => {
+      const item = update(new Item(name, 0, 6));
+
+      expect(item).toEqual(new Item(name, -1, 2));
+    });
+
+    it("never decreases quality below zero", () => {
+      const item = update(new Item(name, 0, 3));
+
+      expect(item).toEqual(new Item(name, -1, 0));
+    });
+  });
+
   describe("Aged Brie", () => {
     it("increases quality by one before the sell by date", () => {
       const item = update(new Item("Aged Brie", 2, 0));
