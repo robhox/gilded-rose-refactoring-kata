@@ -1,57 +1,74 @@
-# Gilded Rose
+# Gilded Rose Refactoring Kata
 
-This is the Gilded Rose kata in TypeScript.
+A TypeScript solution to the [Gilded Rose Refactoring Kata](https://github.com/emilybache/GildedRose-Refactoring-Kata), including the new Conjured item behaviour described in the [requirements](./GildedRoseRequirements.md).
 
-## Getting started
+## Prerequisites
 
-Install dependencies
+- Node.js
+- npm
+
+## Install
+
+Install the locked dependency versions:
 
 ```sh
-npm install
+npm ci
 ```
 
-## Run the unit tests from the Command-Line
+## Compile
 
-There are two unit test frameworks to choose from, Jest and Mocha.
+Compile the TypeScript sources to `dist/`:
+
+```sh
+npm run compile
+```
+
+## Run
+
+After compiling, run the inventory simulation:
+
+```sh
+node dist/test/golden-master-text-test.js
+```
+
+It runs for two days by default. Pass a number to choose the duration:
+
+```sh
+node dist/test/golden-master-text-test.js 10
+```
+
+## Test
+
+Run the Jest test suite and generate coverage:
 
 ```sh
 npm run test:jest
 ```
 
-To run all tests in watch mode
+The HTML coverage report is generated at `coverage/lcov-report/index.html`.
+
+Run Jest continuously while working:
 
 ```sh
 npm run test:jest:watch
 ```
 
-Mocha
+## Approach
 
-```sh
-npm run test:mocha
-```
+The original implementation was first protected with characterization tests and a Jest snapshot of the inventory simulation. The production code was then refactored through small, behaviour-preserving commits before implementing Conjured items with dedicated tests.
 
+The resulting design keeps the public `Item` API unchanged and delegates each item category to focused update logic. Conjured items are identified by the `Conjured` name prefix and degrade twice as fast as ordinary items, including after their sell-by date.
 
-## Run the TextTest fixture from the Command-Line
+## Project structure
 
-_You may need to install `ts-node`_
+- `app/gilded-rose.ts`: inventory update implementation.
+- `test/jest/gilded-rose.spec.ts`: unit and boundary tests for each item category.
+- `test/jest/approvals.spec.ts`: snapshot-based characterization tests.
+- `test/golden-master-text-test.ts`: inventory simulation used by the approval test.
+- `GildedRoseRequirements.md`: kata requirements.
 
-```sh
-npx ts-node test/golden-master-text-test.ts
-```
+## AI usage
 
-Or with number of days as args:
-```sh
-npx ts-node test/golden-master-text-test.ts 10
-```
+OpenAI Codex was used as a pair-programming assistant to discuss technical trade-offs, suggest test cases and incremental refactoring steps, and review the project configuration and documentation.
 
-You should make sure the command shown above works when you execute it in a terminal before trying to use TextTest (see below).
-
-
-## Run the TextTest approval test that comes with this project
-
-There are instructions in the [TextTest Readme](../texttests/README.md) for setting up TextTest. You will need to specify the Python executable and interpreter in [config.gr](../texttests/config.gr). Uncomment these lines:
-
-    executable:${TEXTTEST_HOME}/python/texttest_fixture.py
-    interpreter:python
-
-
+Each change was reviewed and understood before being accepted, then validated through Jest tests, snapshots and coverage. The final implementation decisions and commit structure remain my responsibility.
