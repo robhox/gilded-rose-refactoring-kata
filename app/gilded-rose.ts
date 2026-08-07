@@ -44,6 +44,10 @@ export class GildedRose {
       return;
     }
 
+    this.updateRegularItem(item);
+  }
+
+  private updateRegularItem(item: Item): void {
     this.decreaseQuality(item);
     item.sellIn = item.sellIn - 1;
 
