@@ -37,15 +37,13 @@ export class GildedRose {
     if (item.name !== AGED_BRIE && item.name !== BACKSTAGE_PASS) {
       this.decreaseQuality(item);
     } else {
-      if (item.quality < 50) {
-        this.increaseQuality(item);
-        if (item.name === BACKSTAGE_PASS) {
-          if (item.sellIn < 11) {
-            this.increaseQuality(item);
-          }
-          if (item.sellIn < 6) {
-            this.increaseQuality(item);
-          }
+      this.increaseQuality(item);
+      if (item.name === BACKSTAGE_PASS) {
+        if (item.sellIn < 11) {
+          this.increaseQuality(item);
+        }
+        if (item.sellIn < 6) {
+          this.increaseQuality(item);
         }
       }
     }
