@@ -40,20 +40,7 @@ export class GildedRose {
     }
 
     if (item.name === BACKSTAGE_PASS) {
-      this.increaseQuality(item);
-      if (item.sellIn < 11) {
-        this.increaseQuality(item);
-      }
-      if (item.sellIn < 6) {
-        this.increaseQuality(item);
-      }
-
-      item.sellIn = item.sellIn - 1;
-
-      if (item.sellIn < 0) {
-        item.quality = 0;
-      }
-
+      this.updateBackstagePass(item);
       return;
     }
 
@@ -71,6 +58,22 @@ export class GildedRose {
 
     if (item.sellIn < 0) {
       this.increaseQuality(item);
+    }
+  }
+
+  private updateBackstagePass(item: Item): void {
+    this.increaseQuality(item);
+    if (item.sellIn < 11) {
+      this.increaseQuality(item);
+    }
+    if (item.sellIn < 6) {
+      this.increaseQuality(item);
+    }
+
+    item.sellIn = item.sellIn - 1;
+
+    if (item.sellIn < 0) {
+      item.quality = 0;
     }
   }
 
