@@ -30,16 +30,16 @@ export class GildedRose {
   }
 
   private updateItem(item: Item): void {
-    if (item.name != AGED_BRIE && item.name != BACKSTAGE_PASS) {
+    if (item.name !== AGED_BRIE && item.name !== BACKSTAGE_PASS) {
       if (item.quality > 0) {
-        if (item.name != SULFURAS) {
+        if (item.name !== SULFURAS) {
           item.quality = item.quality - 1;
         }
       }
     } else {
       if (item.quality < 50) {
         item.quality = item.quality + 1;
-        if (item.name == BACKSTAGE_PASS) {
+        if (item.name === BACKSTAGE_PASS) {
           if (item.sellIn < 11) {
             if (item.quality < 50) {
               item.quality = item.quality + 1;
@@ -53,14 +53,14 @@ export class GildedRose {
         }
       }
     }
-    if (item.name != SULFURAS) {
+    if (item.name !== SULFURAS) {
       item.sellIn = item.sellIn - 1;
     }
     if (item.sellIn < 0) {
-      if (item.name != AGED_BRIE) {
-        if (item.name != BACKSTAGE_PASS) {
+      if (item.name !== AGED_BRIE) {
+        if (item.name !== BACKSTAGE_PASS) {
           if (item.quality > 0) {
-            if (item.name != SULFURAS) {
+            if (item.name !== SULFURAS) {
               item.quality = item.quality - 1;
             }
           }
